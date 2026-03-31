@@ -260,7 +260,7 @@ classdef SpinArray < matlab.mixin.SetGet & matlab.mixin.Copyable
 
       d_ = zeros(obj.nM, 3);
       d_(:, 3) = (M0 .* (1 - E1)) ./ (1 - cos(beta_rad) .* cos(alpha_rad) .* E1) .* cos(beta_rad);
-      d_(:, 3) = (M0 .* (1 - E1)) ./ (1 - cos(beta_rad) .* cos(alpha_rad) .* E1) .* sin(beta_rad);
+      d_(:, 1) = (M0 .* (1 - E1)) ./ (1 - cos(beta_rad) .* cos(alpha_rad) .* E1) .* sin(beta_rad);
       d_(isnan(d_)) = 0;
 
       weight_ = arg.weight_iv .* ov_ + arg.weight_ov .* iv_;  % (nM, 1)
