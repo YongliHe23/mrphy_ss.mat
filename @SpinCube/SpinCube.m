@@ -95,24 +95,6 @@ classdef SpinCube < mrphy.SpinArray
       [Mo, Mhst] = applypulse_ss@mrphy.SpinArray(obj, pulse,kw{:});
     end
 
-    function [M_ss, Mhst_] = applypulse_ss_sms(obj, pulse, varargin)
-      %INPUTS:
-      % - pulse (1,) mrphy.Pulse
-      %OPTIONALS:
-      % - b1Map_ | b1Map (nM, 1, nCoils) ^ (*Nd, 1, nCoils)
-      % - doCim [T/f]
-      % - doEmbed [t/F]
-      % - doUpdate [t/F]
-      % - TR (1,) s, repetition time for beta. Dflt 55e-3.
-      % - vTR (1,) s, volume TR for alpha. Dflt 55e-2.
-      % - alpha (1,) deg, flip angle of slice-selective tip-down. Dflt 52.
-      % - alphaDur (1,) s, duration of alpha pulse. Dflt 8e-3.
-      %OUTPUTS:
-      % - M_ss  (nM, xyz) | (*Nd, xyz)
-      % - Mhst_ (nM, xyz, nT) | (*Nd, xyz, nT)
-      kw = [{'loc_',obj.loc_, 'b0Map_',obj.b0Map_}, varargin];
-      [M_ss, Mhst_] = applypulse_ss_sms@mrphy.SpinArray(obj, pulse, kw{:});
-    end
 
     function [xcoord, ycoord, zcoord] = get_coords(obj)
       cSub = mrphy.utils.ctrSub(obj.dim);
