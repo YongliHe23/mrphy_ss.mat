@@ -103,10 +103,19 @@ classdef SpinArray < matlab.mixin.SetGet & matlab.mixin.Copyable
     end
     
     function [M_ss, Mhst_] = applypulse_ss(obj, pulse,varargin)
-      %Comupte steady state Magnetization
+      % Calculate the steady state(SS) magnetization in Spoiled Gradient-Recalled Echo (SPGR)
+      % Here the input "Pulse" object is generally treadted as a saturation preparation pulse (called 'beta'), 
+      % followed by a nonselective excitation(called 'alpha'). 
+      % I.e., assuming the following sequence structure:
+      %  [beta-alpha-readout]xN_rep
+      % If alpha=0, then input Pulse object would be treated as selective exctiation 
+      % instead of saturation preparation.
+      % The output 'M_ss' is defined at the moment right before the 'alpha' pulse. 
       %INPUTS:
       % - pulse (1,) @Pulse
       %OPTIONALS:
+      % - TR: TR (sec)
+      % - alpha: uniform excitation FA (degree)
       % - loc_   ^ loc   (nM, xyz)       ^ (*Nd, xyz), XOR
       % - b0Map_ | b0Map (nM, 1, nCoils) ^ (*Nd, 1, nCoils)
       % - b1Map_ | b1Map (nM, 1, nCoils) ^ (*Nd, 1, nCoils)
@@ -123,7 +132,7 @@ classdef SpinArray < matlab.mixin.SetGet & matlab.mixin.Copyable
       [arg.b0Map, arg.b0Map_] = deal([], []);
       [arg.b1Map, arg.b1Map_] = deal([], []);
       [arg.doCim, arg.doEmbed, arg.doUpdate] = deal(true, false, false);
-      [arg.alpha,arg.TR] = deal(15,55e-3); %\degree, ms
+      [arg.alpha,arg.TR] = deal(15,55e-3); %\degree, sec
 
       arg = attrParser(arg, varargin);
 

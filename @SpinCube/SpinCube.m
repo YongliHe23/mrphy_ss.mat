@@ -79,11 +79,19 @@ classdef SpinCube < mrphy.SpinArray
     end
     
     function [Mo, Mhst] = applypulse_ss(obj, pulse, varargin)
+      % Calculate the steady state(SS) magnetization in Spoiled Gradient-Recalled Echo (SPGR)
+      % Here the input "Pulse" object is generally treadted as a saturation preparation pulse (called 'beta'), 
+      % followed by a nonselective excitation(called 'alpha'). 
+      % I.e., assuming the following sequence structure:
+      %  [beta-alpha-readout]xN_rep
+      % If alpha=0, then input Pulse object would be treated as selective exctiation 
+      % instead of saturation preparation.
+      % The output 'M' is defined at the moment right before the 'alpha' pulse. 
       %INPUTS:
       % - pulse (1,) mrphy.Pulse
-      % - Tr: TR
-      % - alpha: uniform excitation FA
       %OPTIONALS:
+      % - TR: TR (sec)
+      % - alpha: uniform excitation FA (degree)
       % - b1Map_ | b1Map (nM, 1, nCoils) ^ (*Nd, 1, nCoils)
       % - doCim [T/f]
       % - doEmbed [t/F]
