@@ -114,8 +114,8 @@ classdef SpinArray < matlab.mixin.SetGet & matlab.mixin.Copyable
       %INPUTS:
       % - pulse (1,) @Pulse
       %OPTIONALS:
-      % - TR: TR (sec)
-      % - alpha: uniform excitation FA (degree)
+      % - TR: TR (sec) dflt=55e-3 s
+      % - alpha: uniform excitation FA (degree) dflt=0
       % - loc_   ^ loc   (nM, xyz)       ^ (*Nd, xyz), XOR
       % - b0Map_ | b0Map (nM, 1, nCoils) ^ (*Nd, 1, nCoils)
       % - b1Map_ | b1Map (nM, 1, nCoils) ^ (*Nd, 1, nCoils)
@@ -132,7 +132,7 @@ classdef SpinArray < matlab.mixin.SetGet & matlab.mixin.Copyable
       [arg.b0Map, arg.b0Map_] = deal([], []);
       [arg.b1Map, arg.b1Map_] = deal([], []);
       [arg.doCim, arg.doEmbed, arg.doUpdate] = deal(true, false, false);
-      [arg.alpha,arg.TR] = deal(15,55e-3); %\degree, sec
+      [arg.alpha,arg.TR] = deal(0,55e-3); %\degree, sec
 
       arg = attrParser(arg, varargin);
 
