@@ -16,7 +16,7 @@ function target = target_Mss(cube, beta_iv, beta_ov, iv, ov, varargin)
       % - weight_iv (1,) [1.0]
       % - weight_ov (1,) [1.0]
       % - doEmbed [T/f]
-      % - alpha   (1,) deg [15], uniform excitation pulse FA  
+      % - alpha   (1,) deg [0], uniform excitation pulse FA  
       % - TR      (1,) Sec [55e-3]
       %OUTPUTS:
       % - target struct with fields:
@@ -25,7 +25,7 @@ function target = target_Mss(cube, beta_iv, beta_ov, iv, ov, varargin)
       import attr.*
 
       [arg.weight_iv, arg.weight_ov] = deal(1.0, 1.0);
-      [arg.doEmbed, arg.alpha, arg.TR] = deal(true, 15, 55e-3);
+      [arg.doEmbed, arg.alpha, arg.TR] = deal(true, 0, 55e-3);
       arg = attrParser(arg, varargin);
 
       iv_ = cube.extract(iv);  % (nM, 1)
